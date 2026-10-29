@@ -1,193 +1,25 @@
-<!doctype html>
-<html lang="pt-BR">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Calculadora educacional dos critérios ACR 2016 para fibromialgia.">
-<title>Calculadora clínica — critérios de fibromialgia</title>
-<style>
-:root{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#172033;background:#f5f7fb;line-height:1.5}
-*{box-sizing:border-box}body{margin:0}header{background:#183b56;color:white;padding:2rem 1rem}
-.wrap{max-width:1000px;margin:auto;padding:0 1rem}h1{font-size:clamp(1.6rem,4vw,2.3rem);line-height:1.15;margin:0 0 .5rem}header p{max-width:760px;margin:.4rem 0 0;color:#e2edf5}
-main{padding:1.25rem 0 3rem}.panel{background:white;border:1px solid #dce3eb;border-radius:16px;padding:1.2rem;margin:0 0 1rem;box-shadow:0 2px 8px #17203308}
-h2{font-size:1.25rem;margin:0 0 .4rem}h3{font-size:1rem;margin:1rem 0 .5rem}.muted{color:#58677a;font-size:.94rem}.small{font-size:.86rem;color:#58677a}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.75rem}
-label.choice{display:flex;align-items:flex-start;gap:.65rem;border:1px solid #dce3eb;padding:.7rem .8rem;border-radius:10px;cursor:pointer;background:#fff}
-label.choice:has(input:checked){border-color:#39739a;background:#f0f7fb}
-input[type=checkbox],input[type=radio]{width:1.1rem;height:1.1rem;flex:0 0 auto;margin-top:.2rem;accent-color:#245d7b}
-.region-group{border-top:1px solid #e6ebf0;padding-top:.7rem;margin-top:.8rem}
-.regions{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.45rem}
-.region{display:flex;align-items:center;gap:.55rem;padding:.48rem .6rem;border-radius:8px;background:#f7f9fc;cursor:pointer}
-.region input{width:1rem;height:1rem;accent-color:#245d7b}
-.scoreline{display:flex;flex-wrap:wrap;gap:.7rem;margin:.8rem 0}
-.metric{flex:1;min-width:130px;border-radius:12px;background:#eef4f8;padding:.8rem}
-.metric strong{display:block;font-size:1.65rem;color:#183b56;line-height:1.2}
-select{width:100%;padding:.7rem;border:1px solid #bdc9d5;border-radius:9px;background:white;color:#172033;font:inherit}
-.symptom-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem}
-button{font:inherit;font-weight:650;border:0;border-radius:10px;padding:.8rem 1rem;cursor:pointer}
-.primary{background:#183b56;color:white}.secondary{background:#eaf0f5;color:#183b56}
-.actions{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem}
-.result{border-radius:12px;padding:1rem;border:1px solid #d8e1e9;background:#f8fafc;margin-top:1rem}
-.result h3{margin:.1rem 0 .4rem}.result.pass{border-color:#8bb8a2;background:#f0f8f3}.result.review{border-color:#d7bd79;background:#fff9e9}
-ul{padding-left:1.25rem}li{margin:.25rem 0}.notice{border-left:4px solid #b78634;background:#fff8e8;padding:.8rem 1rem;border-radius:0 8px 8px 0}
-footer{padding:1rem 0 2rem;color:#58677a;font-size:.85rem}
-@media(max-width:520px){.panel{padding:1rem}.regions{grid-template-columns:1fr 1fr}.region{font-size:.92rem}}
-</style>
-</head>
-<body>
-<header><div class="wrap">
-<h1>Calculadora clínica de fibromialgia</h1>
-<p>Ferramenta educacional baseada nos critérios preliminares revisados do American College of Rheumatology (ACR), 2016.</p>
-</div></header>
-<main class="wrap">
-<section class="panel">
-<h2>1. WPI — Índice de Dor Generalizada</h2>
-<p class="muted">Marque as áreas em que a pessoa sentiu dor durante a última semana. Cada área marcada vale 1 ponto. Máximo: 19.</p>
-<div class="scoreline"><div class="metric"><span class="small">WPI atual</span><strong id="wpi">0 / 19</strong></div></div>
-<div class="region-group"><h3>Lado esquerdo</h3><div class="regions" id="left"></div></div>
-<div class="region-group"><h3>Lado direito</h3><div class="regions" id="right"></div></div>
-<div class="region-group"><h3>Regiões centrais / axiais</h3><div class="regions" id="central"></div></div>
-<p class="small">Nota: mandíbula, tórax e abdome entram no WPI, mas não contam para a regra de distribuição da dor em 4 de 5 regiões corporais.</p>
-</section>
-
-<section class="panel">
-<h2>2. SSS — Escala de Gravidade dos Sintomas</h2>
-<p class="muted">Nos três primeiros itens, selecione a gravidade nos últimos sete dias: 0 = ausente; 1 = leve ou discreta; 2 = moderada ou frequentemente presente; 3 = grave, persistente ou com grande impacto. Use o julgamento clínico e a descrição original dos critérios.</p>
-<div class="symptom-grid">
-<div><label for="fatigue"><strong>Fadiga</strong></label><select id="fatigue" class="severity"><option value="0">0 — ausente</option><option value="1">1 — leve</option><option value="2">2 — moderada</option><option value="3">3 — grave</option></select></div>
-<div><label for="sleep"><strong>Acordar sem se sentir descansado(a) / sono não reparador</strong></label><select id="sleep" class="severity"><option value="0">0 — ausente</option><option value="1">1 — leve</option><option value="2">2 — moderado</option><option value="3">3 — grave</option></select></div>
-<div><label for="cognitive"><strong>Sintomas cognitivos</strong> <span class="small">(ex.: dificuldade de memória/concentração)</span></label><select id="cognitive" class="severity"><option value="0">0 — ausentes</option><option value="1">1 — leves</option><option value="2">2 — moderados</option><option value="3">3 — graves</option></select></div>
-</div>
-<h3>Outros sintomas (últimos seis meses)</h3>
-<p class="muted">Marque os que estiveram presentes. Cada item marcado soma 1 ponto.</p>
-<div class="grid">
-<label class="choice"><input type="checkbox" class="extra"> Cefaleia (dor de cabeça)</label>
-<label class="choice"><input type="checkbox" class="extra"> Dor ou cólicas no abdome inferior</label>
-<label class="choice"><input type="checkbox" class="extra"> Depressão</label>
-</div>
-<div class="scoreline"><div class="metric"><span class="small">SSS atual</span><strong id="sss">0 / 12</strong></div></div>
-</section>
-
-<section class="panel">
-<h2>3. Requisitos adicionais</h2>
-<div class="grid">
-<div>
-<p><strong>Os sintomas estão presentes em nível semelhante há pelo menos três meses?</strong></p>
-<label class="choice"><input type="radio" name="duration" value="yes"> Sim</label>
-<label class="choice"><input type="radio" name="duration" value="no"> Não</label>
-</div>
-<div>
-<p><strong>A dor está presente em pelo menos 4 de 5 regiões?</strong></p>
-<p class="small">As cinco regiões são: superior esquerda, superior direita, inferior esquerda, inferior direita e axial. A região da mandíbula, tórax e abdome não entra nessa contagem.</p>
-<div id="regionCount" class="metric"><span class="small">Regiões positivas</span><strong>0 / 5</strong></div>
-</div>
-</div>
-<h3>Regiões para distribuição da dor</h3>
-<p class="muted">Estas regiões são calculadas a partir das áreas selecionadas no WPI; você não precisa marcá-las novamente.</p>
-<div class="grid" id="regionStatus"></div>
-</section>
-
-<section class="panel">
-<h2>4. Resultado interpretativo</h2>
-<p class="muted">Critérios ACR 2016: WPI ≥ 7 e SSS ≥ 5, ou WPI entre 4 e 6 e SSS ≥ 9; dor em pelo menos 4 de 5 regiões; sintomas em nível semelhante por pelo menos 3 meses.</p>
-<div id="result" class="result" aria-live="polite"><h3>Preencha os dados</h3><p>O resultado será atualizado conforme os campos forem selecionados.</p></div>
-<div class="actions">
-<button class="primary" id="evaluate">Atualizar resultado</button>
-<button class="secondary" id="reset" type="button">Limpar formulário</button>
-<button class="secondary" id="print" type="button">Imprimir / salvar PDF</button>
-</div>
-</section>
-
-<section class="panel">
-<h2>Limites e uso responsável</h2>
-<div class="notice"><strong>Esta ferramenta não substitui avaliação clínica.</strong> Ela verifica critérios classificatórios de fibromialgia, mas não exclui doenças concomitantes ou causas secundárias de dor. O resultado deve ser interpretado por profissional habilitado, considerando história, exame físico, diagnóstico diferencial e sinais de alerta.</div>
-<p class="small">Ferramenta educacional sem armazenamento ou envio de dados: as informações inseridas permanecem no navegador durante a sessão. Evite inserir dados identificáveis de pacientes. Para uso clínico institucional, revise conteúdo, privacidade, acessibilidade e requisitos locais antes da publicação.</p>
-<h3>Referência</h3>
-<p class="small">Wolfe F, Clauw DJ, Fitzcharles MA, et al. 2016 Revisions to the 2010/2011 fibromyalgia diagnostic criteria. <em>Seminars in Arthritis and Rheumatism</em>. 2016;46(3):319–329. doi:10.1016/j.semarthrit.2016.08.012.</p>
-<p class="small"><a href="https://doi.org/10.1016/j.semarthrit.2016.08.012" target="_blank" rel="noopener">https://doi.org/10.1016/j.semarthrit.2016.08.012</a></p>
-</section>
-</main>
-<footer><div class="wrap">Protótipo educacional em português do Brasil · Critérios ACR 2016</div></footer>
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Calculadora ACR 2016 — Fibromialgia</title><style>
+:root{font-family:system-ui,Arial,sans-serif;color:#202938;background:#f5f7fa}*{box-sizing:border-box}body{margin:0}main{max-width:1100px;margin:auto;padding:22px 14px}h1{font-size:clamp(1.5rem,3vw,2.1rem);margin:0 0 8px}h2{font-size:1.15rem;margin:0 0 10px}h3{font-size:.95rem;margin:12px 0 7px}.intro,.small,.hint{color:#5c6675}.intro{margin:0 0 18px}.small,.hint{font-size:.9rem}.layout{display:grid;grid-template-columns:1.1fr .9fr;gap:16px;align-items:start}.card{background:white;border:1px solid #d8dee7;border-radius:13px;padding:16px;margin-bottom:14px}.note{background:#eef4ff;border-left:4px solid #2457a7;padding:10px 12px;border-radius:7px;margin:10px 0}.diagrams{display:grid;grid-template-columns:1fr 1fr;gap:8px}.diagram{background:#fbfcfe;border:1px solid #d8dee7;border-radius:10px;padding:5px;min-width:0}.diagram h3{text-align:center;color:#5c6675;margin:4px}.diagram svg{width:100%;height:auto;display:block}.base{fill:#e8edf3;stroke:#8491a3;stroke-width:1.5}.hot{fill:#c6d2e2;fill-opacity:.35;stroke:#70839d;stroke-width:1.4;cursor:pointer}.hot:hover{fill:#8eb0e9;fill-opacity:.8}.hot.sel{fill:#2457a7;fill-opacity:.85;stroke:#143e82;stroke-width:2}.checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.check{display:flex;align-items:flex-start;gap:8px;border:1px solid #d8dee7;border-radius:8px;padding:8px;cursor:pointer;font-size:.92rem}.check input{margin-top:3px;accent-color:#2457a7;width:17px;height:17px;flex:none}.row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid #edf0f4}.row:last-child{border-bottom:0}select{font:inherit;border:1px solid #bcc6d3;border-radius:7px;padding:6px;background:white;max-width:55%}.regions{display:grid;grid-template-columns:1fr 1fr;gap:7px}.region{border:1px solid #d8dee7;border-radius:8px;padding:9px;font-size:.9rem}.region strong{display:block}.region span{color:#5c6675;font-size:.84rem}.region.on{background:#e8f5ec;border-color:#a9d8b8}.region.on span{color:#17633a;font-weight:650}.result{border:1px solid #d8dee7;background:#f3f4f6;border-radius:9px;padding:12px;margin-top:10px}.result.pass{background:#e8f5ec;border-color:#a9d8b8}.result.review{background:#fff4df;border-color:#f0d49b}.result strong{display:block;margin-bottom:4px}button{font:inherit;border:1px solid #aeb8c6;background:white;border-radius:8px;padding:8px 11px;cursor:pointer;margin:5px 4px 0 0}.primary{background:#2457a7;color:white;border-color:#2457a7}.duration{display:flex;gap:9px;align-items:flex-start}.duration input{margin-top:4px;accent-color:#2457a7}footer{font-size:.82rem;color:#5c6675;margin-top:12px}@media(max-width:800px){.layout{grid-template-columns:1fr}}@media(max-width:460px){.checks,.regions{grid-template-columns:1fr}.diagrams{gap:4px}.diagram{padding:2px}}
+</style></head><body><main>
+<h1>Calculadora dos critérios ACR 2016 para fibromialgia</h1><p class="intro">Ferramenta educacional para organizar os componentes dos critérios de 2016 do American College of Rheumatology (ACR). Apoia o raciocínio clínico, mas não substitui avaliação médica nem exclui diagnósticos diferenciais.</p>
+<div class="layout"><section>
+<div class="card"><h2>1. Índice de Dor Generalizada (WPI)</h2><p class="small">Marque as áreas em que houve dor durante a última semana. Selecione no desenho clicável ou na lista; as duas formas ficam sincronizadas.</p><div class="note"><b>Importante:</b> tórax, abdome e mandíbula contam para a pontuação WPI, mas <b>não</b> contam para definir a distribuição da dor em 4 de 5 regiões.</div>
+<div class="diagrams"><div class="diagram"><h3>Vista anterior</h3><svg viewBox="0 0 220 340" role="group" aria-label="Mapa corporal anterior">
+<circle class="base" cx="110" cy="27" r="17"/><path class="base" d="M100 45 L120 45 L123 59 Q141 62 150 77 L160 124 L149 131 L138 98 L134 150 L128 194 L134 235 L143 303 L129 307 L111 245 L105 202 L99 245 L82 307 L68 303 L77 235 L83 194 L76 150 L71 98 L60 131 L50 124 L60 77 Q69 62 97 59Z"/>
+<rect class="hot" data-a="neck" x="99" y="44" width="22" height="20" rx="5"/><ellipse class="hot" data-a="jawL" cx="101" cy="34" rx="7" ry="4"/><ellipse class="hot" data-a="jawR" cx="119" cy="34" rx="7" ry="4"/><ellipse class="hot" data-a="shoulderL" cx="76" cy="75" rx="16" ry="12"/><ellipse class="hot" data-a="shoulderR" cx="144" cy="75" rx="16" ry="12"/>
+<path class="hot" data-a="upperArmL" d="M61 84 Q54 103 49 123 L59 128 Q68 106 72 91Z"/><path class="hot" data-a="upperArmR" d="M159 84 Q166 103 171 123 L161 128 Q152 106 148 91Z"/><path class="hot" data-a="lowerArmL" d="M49 132 L59 135 L48 162 L38 160Z"/><path class="hot" data-a="lowerArmR" d="M171 132 L161 135 L172 162 L182 160Z"/>
+<path class="hot" data-a="chest" d="M84 75 Q110 86 136 75 L131 118 Q110 128 89 118Z"/><path class="hot" data-a="abdomen" d="M89 121 Q110 131 131 121 L128 164 Q110 172 92 164Z"/><ellipse class="hot" data-a="hipL" cx="91" cy="176" rx="15" ry="13"/><ellipse class="hot" data-a="hipR" cx="129" cy="176" rx="15" ry="13"/>
+<path class="hot" data-a="upperLegL" d="M86 192 L106 196 L99 240 L82 240Z"/><path class="hot" data-a="upperLegR" d="M114 196 L134 192 L138 240 L121 240Z"/><path class="hot" data-a="lowerLegL" d="M82 245 L99 245 L87 298 L72 298Z"/><path class="hot" data-a="lowerLegR" d="M121 245 L138 245 L148 298 L133 298Z"/><text x="110" y="326" font-size="10" text-anchor="middle" fill="#5c6675">Clique nas áreas de dor</text></svg></div>
+<div class="diagram"><h3>Vista posterior</h3><svg viewBox="0 0 220 340" role="group" aria-label="Mapa corporal posterior">
+<circle class="base" cx="110" cy="27" r="17"/><path class="base" d="M100 45 L120 45 L123 59 Q141 62 150 77 L160 124 L149 131 L138 98 L134 150 L128 194 L134 235 L143 303 L129 307 L111 245 L105 202 L99 245 L82 307 L68 303 L77 235 L83 194 L76 150 L71 98 L60 131 L50 124 L60 77 Q69 62 97 59Z"/>
+<rect class="hot" data-a="neck" x="99" y="44" width="22" height="20" rx="5"/><ellipse class="hot" data-a="shoulderL" cx="76" cy="75" rx="16" ry="12"/><ellipse class="hot" data-a="shoulderR" cx="144" cy="75" rx="16" ry="12"/><path class="hot" data-a="upperArmL" d="M61 84 Q54 103 49 123 L59 128 Q68 106 72 91Z"/><path class="hot" data-a="upperArmR" d="M159 84 Q166 103 171 123 L161 128 Q152 106 148 91Z"/><path class="hot" data-a="lowerArmL" d="M49 132 L59 135 L48 162 L38 160Z"/><path class="hot" data-a="lowerArmR" d="M171 132 L161 135 L172 162 L182 160Z"/>
+<path class="hot" data-a="upperBack" d="M84 75 Q110 86 136 75 L131 118 Q110 128 89 118Z"/><path class="hot" data-a="lowerBack" d="M89 121 Q110 131 131 121 L128 164 Q110 172 92 164Z"/><ellipse class="hot" data-a="hipL" cx="91" cy="176" rx="15" ry="13"/><ellipse class="hot" data-a="hipR" cx="129" cy="176" rx="15" ry="13"/><path class="hot" data-a="upperLegL" d="M86 192 L106 196 L99 240 L82 240Z"/><path class="hot" data-a="upperLegR" d="M114 196 L134 192 L138 240 L121 240Z"/><path class="hot" data-a="lowerLegL" d="M82 245 L99 245 L87 298 L72 298Z"/><path class="hot" data-a="lowerLegR" d="M121 245 L138 245 L148 298 L133 298Z"/><text x="110" y="326" font-size="10" text-anchor="middle" fill="#5c6675">Clique nas áreas de dor</text></svg></div></div>
+<p class="hint">Azul = selecionada. A lateralidade corresponde à pessoa representada, não ao observador.</p><button id="clearWpi">Limpar áreas de dor</button><h3>Lista de áreas (alternativa ao desenho)</h3><div class="checks" id="wpiList">
+<label class="check"><input type="checkbox" data-a="jawL">Mandíbula esquerda</label><label class="check"><input type="checkbox" data-a="jawR">Mandíbula direita</label><label class="check"><input type="checkbox" data-a="shoulderL">Ombro esquerdo</label><label class="check"><input type="checkbox" data-a="shoulderR">Ombro direito</label><label class="check"><input type="checkbox" data-a="upperArmL">Braço superior esquerdo</label><label class="check"><input type="checkbox" data-a="upperArmR">Braço superior direito</label><label class="check"><input type="checkbox" data-a="lowerArmL">Antebraço esquerdo</label><label class="check"><input type="checkbox" data-a="lowerArmR">Antebraço direito</label><label class="check"><input type="checkbox" data-a="hipL">Quadril/nádega/trocânter esquerdo</label><label class="check"><input type="checkbox" data-a="hipR">Quadril/nádega/trocânter direito</label><label class="check"><input type="checkbox" data-a="upperLegL">Coxa esquerda</label><label class="check"><input type="checkbox" data-a="upperLegR">Coxa direita</label><label class="check"><input type="checkbox" data-a="lowerLegL">Perna inferior esquerda</label><label class="check"><input type="checkbox" data-a="lowerLegR">Perna inferior direita</label><label class="check"><input type="checkbox" data-a="neck">Pescoço</label><label class="check"><input type="checkbox" data-a="chest">Tórax</label><label class="check"><input type="checkbox" data-a="abdomen">Abdome</label><label class="check"><input type="checkbox" data-a="upperBack">Dorso superior</label><label class="check"><input type="checkbox" data-a="lowerBack">Dorso inferior / região lombar</label></div><p class="hint"><b>WPI:</b> <span id="wpi">0</span> de 19 áreas.</p></div>
+<div class="card"><h2>2. Escala de Gravidade dos Sintomas (SSS)</h2><p class="small">Intensidade na última semana: 0 = ausente; 1 = leve/intermitente; 2 = moderado ou frequentemente presente; 3 = grave, persistente e com impacto importante.</p><div class="row"><label for="fatigue">Fadiga</label><select id="fatigue"><option value="0">0 — Ausente</option><option value="1">1 — Leve</option><option value="2">2 — Moderada</option><option value="3">3 — Grave</option></select></div><div class="row"><label for="sleep">Sono não reparador</label><select id="sleep"><option value="0">0 — Ausente</option><option value="1">1 — Leve</option><option value="2">2 — Moderado</option><option value="3">3 — Grave</option></select></div><div class="row"><label for="cognitive">Sintomas cognitivos</label><select id="cognitive"><option value="0">0 — Ausentes</option><option value="1">1 — Leves</option><option value="2">2 — Moderados</option><option value="3">3 — Graves</option></select></div><h3>Sintomas adicionais</h3><p class="small">Cada item assinalado acrescenta 1 ponto.</p><div class="checks"><label class="check"><input type="checkbox" id="headache">Cefaleia</label><label class="check"><input type="checkbox" id="lowerAbdominal">Dor/cólica no abdome inferior</label><label class="check"><input type="checkbox" id="depression">Depressão</label></div><p class="hint"><b>SSS:</b> <span id="sss">0</span> pontos (0–12).</p></div></section>
+<aside><div class="card"><h2>3. Duração dos sintomas</h2><label class="duration"><input type="checkbox" id="duration">Os sintomas estão presentes em nível semelhante há pelo menos 3 meses.</label></div><div class="card"><h2>4. Distribuição da dor em 4 de 5 regiões</h2><p class="small">A distribuição é calculada automaticamente. Para este critério, contam membros superiores esquerdo e direito, membros inferiores esquerdo e direito e região axial.</p><div class="note"><b>Região axial:</b> considera pescoço, dorso superior e dorso inferior/região lombar. Tórax, abdome e mandíbula contam no WPI, mas não entram na contagem das 5 regiões.</div><div class="regions"><div class="region" id="rUL"><strong>Membro superior esquerdo</strong><span>Não preenchida</span></div><div class="region" id="rUR"><strong>Membro superior direito</strong><span>Não preenchida</span></div><div class="region" id="rLL"><strong>Membro inferior esquerdo</strong><span>Não preenchida</span></div><div class="region" id="rLR"><strong>Membro inferior direito</strong><span>Não preenchida</span></div><div class="region" id="rAX" style="grid-column:1/-1"><strong>Região axial</strong><span>Não preenchida</span></div></div><p class="hint"><b>Regiões positivas:</b> <span id="regionCount">0</span> de 5.</p></div>
+<div class="card"><h2>Resultado orientativo</h2><p><b>WPI:</b> <span id="rwpi">0</span>/19 &nbsp; <b>SSS:</b> <span id="rsss">0</span>/12</p><p><b>Regiões positivas:</b> <span id="rregions">0</span>/5</p><div class="result" id="result"><strong id="resultTitle">Preencha os campos</strong><span id="resultText">O resultado será atualizado automaticamente.</span></div><button class="primary" id="reset">Reiniciar avaliação</button><button id="print">Imprimir / salvar PDF</button></div>
+<div class="card"><h2>Referência e limites</h2><p class="small">Critérios revisados ACR 2016: WPI ≥ 7 e SSS ≥ 5, ou WPI entre 4–6 e SSS ≥ 9; dor generalizada em pelo menos 4 de 5 regiões; sintomas presentes em nível semelhante por pelo menos 3 meses.</p><p class="small">Wolfe F, Clauw DJ, Fitzcharles MA, et al. 2016 Revisions to the 2010/2011 Fibromyalgia Diagnostic Criteria. <i>Seminars in Arthritis and Rheumatism.</i> 2016;46(3):319–329. <a href="https://pubmed.ncbi.nlm.nih.gov/27916278/" target="_blank" rel="noopener">PubMed</a>.</p><p class="small">Ferramenta educacional; não substitui julgamento clínico. Considere diagnósticos diferenciais e condições coexistentes.</p></div></aside></div><footer>Versão 2 — mapa corporal esquemático clicável. O desenho serve para seleção de regiões e não é uma representação anatômica precisa.</footer></main>
 <script>
-const groups = {
- left: [
-  ["leftShoulder","Cintura escapular / ombro"],["leftUpperArm","Braço superior"],["leftLowerArm","Antebraço"],["leftHip","Quadril / nádega / trocânter"],["leftUpperLeg","Coxa"],["leftLowerLeg","Perna inferior"],["leftJaw","Mandíbula"]
- ],
- right: [
-  ["rightShoulder","Cintura escapular / ombro"],["rightUpperArm","Braço superior"],["rightLowerArm","Antebraço"],["rightHip","Quadril / nádega / trocânter"],["rightUpperLeg","Coxa"],["rightLowerLeg","Perna inferior"],["rightJaw","Mandíbula"]
- ],
- central: [
-  ["chest","Tórax"],["abdomen","Abdome"],["upperBack","Dorso superior"],["lowerBack","Região lombar"],["neck","Pescoço"]
- ]
-};
-const labels = Object.fromEntries(Object.values(groups).flat().map(([id,label])=>[id,label]));
-Object.entries(groups).forEach(([group,items])=>{
- const root=document.getElementById(group);
- items.forEach(([id,label])=>{
-  const lab=document.createElement("label");lab.className="region";
-  lab.innerHTML=`<input type="checkbox" class="pain-area" id="${id}"><span>${label}</span>`;
-  root.appendChild(lab);
- });
-});
-const $=id=>document.getElementById(id);
-function selected(id){return $(id).checked}
-function getWPI(){return document.querySelectorAll(".pain-area:checked").length}
-function getSSS(){
- const base=Number($("fatigue").value)+Number($("sleep").value)+Number($("cognitive").value);
- const extra=[...document.querySelectorAll(".extra")].filter(x=>x.checked).length;
- return base+extra;
-}
-function regions(){
- const upperLeft=["leftShoulder","leftUpperArm","leftLowerArm"].some(selected);
- const upperRight=["rightShoulder","rightUpperArm","rightLowerArm"].some(selected);
- const lowerLeft=["leftHip","leftUpperLeg","leftLowerLeg"].some(selected);
- const lowerRight=["rightHip","rightUpperLeg","rightLowerLeg"].some(selected);
- const axial=["neck","upperBack","lowerBack"].some(selected);
- return [
-  ["Superior esquerda",upperLeft],["Superior direita",upperRight],
-  ["Inferior esquerda",lowerLeft],["Inferior direita",lowerRight],["Axial",axial]
- ];
-}
-function duration(){return document.querySelector('input[name="duration"]:checked')?.value || ""}
-function render(){
- const wpi=getWPI(),sss=getSSS(),rs=regions(),n=rs.filter(x=>x[1]).length,d=duration();
- $("wpi").textContent=`${wpi} / 19`;
- $("sss").textContent=`${sss} / 12`;
- $("regionCount").innerHTML=`<span class="small">Regiões positivas</span><strong>${n} / 5</strong>`;
- $("regionStatus").innerHTML=rs.map(([name,yes])=>`<div class="metric"><span class="small">${name}</span><strong style="font-size:1rem">${yes?"Positiva":"Não positiva"}</strong></div>`).join("");
- const symptomRule=(wpi>=7&&sss>=5)||(wpi>=4&&wpi<=6&&sss>=9);
- const reqRegions=n>=4, reqDuration=d==="yes";
- let title,detail,klass="review";
- if(!d){
-  title="Resultado pendente";
-  detail="Informe se os sintomas estão presentes em nível semelhante há pelo menos três meses.";
- } else if(!symptomRule||!reqRegions||!reqDuration){
-  title="Critérios ACR 2016 não preenchidos com os dados atuais";
-  const missing=[];
-  if(!symptomRule)missing.push(`combinação WPI/SSS (WPI ${wpi}; SSS ${sss})`);
-  if(!reqRegions)missing.push(`distribuição da dor em pelo menos 4 de 5 regiões (atualmente ${n})`);
-  if(!reqDuration)missing.push("duração de pelo menos três meses");
-  detail="Requisito(s) não preenchido(s): "+missing.join("; ")+". Isso não exclui outras causas de dor nem impede reavaliação clínica.";
- } else {
-  title="Critérios classificatórios ACR 2016 preenchidos";
-  detail=`Combinação WPI/SSS adequada (WPI ${wpi}; SSS ${sss}), dor em ${n} de 5 regiões e sintomas por pelo menos três meses. O resultado apoia a avaliação clínica de fibromialgia, mas não estabelece diagnóstico isoladamente.`;
-  klass="pass";
- }
- $("result").className="result "+klass;
- $("result").innerHTML=`<h3>${title}</h3><p>${detail}</p><p class="small">Regra de sintomas: ${(wpi>=7&&sss>=5)?"WPI ≥ 7 e SSS ≥ 5":(wpi>=4&&wpi<=6&&sss>=9)?"WPI 4–6 e SSS ≥ 9":"não atingida"}.</p>`;
-}
-document.addEventListener("change",e=>{if(e.target.matches(".pain-area,.severity,.extra,input[name='duration']"))render()});
-$("evaluate").addEventListener("click",render);
-$("reset").addEventListener("click",()=>{
- document.querySelectorAll("input[type=checkbox]").forEach(x=>x.checked=false);
- document.querySelectorAll("input[name=duration]").forEach(x=>x.checked=false);
- document.querySelectorAll(".severity").forEach(x=>x.value="0");
- render();
-});
-$("print").addEventListener("click",()=>window.print());
-render();
-</script>
-<style>
-@media print{body{background:white}header{background:white;color:#172033;padding:1rem 0}header p{color:#172033}.panel{box-shadow:none;break-inside:avoid}.actions{display:none}main{padding-top:.5rem}.region{background:white}}
-</style>
-</body></html>
+const names={jawL:1,jawR:1,shoulderL:1,shoulderR:1,upperArmL:1,upperArmR:1,lowerArmL:1,lowerArmR:1,hipL:1,hipR:1,upperLegL:1,upperLegR:1,lowerLegL:1,lowerLegR:1,neck:1,chest:1,abdomen:1,upperBack:1,lowerBack:1};const ids=Object.keys(names),checks=[...document.querySelectorAll('#wpiList input')],hot=[...document.querySelectorAll('.hot')];function on(id){return !!checks.find(x=>x.dataset.a===id)?.checked}function set(id,v){checks.filter(x=>x.dataset.a===id).forEach(x=>x.checked=v);hot.filter(x=>x.dataset.a===id).forEach(x=>x.classList.toggle('sel',v));update()}function toggle(id){set(id,!on(id))}hot.forEach(x=>{x.addEventListener('click',()=>toggle(x.dataset.a));x.setAttribute('tabindex','0');x.setAttribute('role','button');x.setAttribute('aria-label',x.dataset.a);x.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle(x.dataset.a)}})});checks.forEach(x=>x.addEventListener('change',()=>set(x.dataset.a,x.checked)));document.getElementById('clearWpi').onclick=()=>ids.forEach(id=>set(id,false));const defs={UL:['shoulderL','upperArmL','lowerArmL'],UR:['shoulderR','upperArmR','lowerArmR'],LL:['hipL','upperLegL','lowerLegL'],LR:['hipR','upperLegR','lowerLegR'],AX:['neck','upperBack','lowerBack']};function update(){let w=ids.filter(on).length,s=+fatigue.value + +sleep.value + +cognitive.value + +headache.checked + +lowerAbdominal.checked + +depression.checked,n=0;Object.entries(defs).forEach(([k,a])=>{let yes=a.some(on),el=document.getElementById('r'+k);el.classList.toggle('on',yes);el.querySelector('span').textContent=yes?'Positiva':'Não preenchida';if(yes)n++});['wpi','rwpi'].forEach(id=>document.getElementById(id).textContent=w);['sss','rsss'].forEach(id=>document.getElementById(id).textContent=s);document.getElementById('regionCount').textContent=n;document.getElementById('rregions').textContent=n;let score=(w>=7&&s>=5)||(w>=4&&w<=6&&s>=9),dur=duration.checked,b=document.getElementById('result'),t=document.getElementById('resultTitle'),tx=document.getElementById('resultText');b.className='result';if(score&&n>=4&&dur){b.classList.add('pass');t.textContent='Critérios preenchidos';tx.textContent='Os dados assinalados preenchem os critérios ACR 2016 considerados por esta ferramenta. Correlacione com a avaliação clínica.'}else if(!w&&!s&&!dur){t.textContent='Preencha os campos';tx.textContent='O resultado será atualizado automaticamente.'}else{b.classList.add('review');t.textContent='Critérios ainda não preenchidos';let m=[];if(!score)m.push('combinação WPI/SSS');if(n<4)m.push('dor em pelo menos 4 de 5 regiões');if(!dur)m.push('duração ≥ 3 meses');tx.textContent='Ainda falta: '+m.join('; ')+'. Isso não exclui fibromialgia nem substitui avaliação clínica.'}}['fatigue','sleep','cognitive','headache','lowerAbdominal','depression','duration'].forEach(id=>document.getElementById(id).addEventListener('change',update));document.getElementById('reset').onclick=()=>{ids.forEach(id=>{checks.filter(x=>x.dataset.a===id).forEach(x=>x.checked=false);hot.filter(x=>x.dataset.a===id).forEach(x=>x.classList.remove('sel'))});['fatigue','sleep','cognitive'].forEach(id=>document.getElementById(id).value='0');['headache','lowerAbdominal','depression','duration'].forEach(id=>document.getElementById(id).checked=false);update();window.scrollTo({top:0,behavior:'smooth'})};document.getElementById('print').onclick=()=>window.print();update();
+</script></body></html>
